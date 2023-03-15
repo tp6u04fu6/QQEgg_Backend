@@ -1,0 +1,93 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "dbXContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "QQEgg_Backend",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[tAdvertise]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tAOrders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCOrderDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCOrders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCoupons]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCustomers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tETitle]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tEvaluations]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tManagers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tProducts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tPSite]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tPSiteRoom]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tSuppliers]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DESKTOP-0SLUV75.dbX",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

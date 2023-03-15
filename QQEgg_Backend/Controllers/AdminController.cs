@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace QQEgg_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class AdminController : ControllerBase
     {
         private readonly dbXContext _dbXContext;
@@ -27,7 +29,7 @@ namespace QQEgg_Backend.Controllers
        /// </summary>
        /// <returns></returns>
        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TCoupons>>> GetCustomerTCoupons()
+        public async Task<ActionResult<TCoupons>> GetCustomerTCoupons()
         {
             var customerId = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
             var customer = await _dbXContext.TCustomers.FindAsync(customerId);
@@ -41,98 +43,33 @@ namespace QQEgg_Backend.Controllers
 
 
             }
-            else
-            {
                 //直接顯示登入畫面
                 return Unauthorized();
-            }
+            
 
         }
-
-        // GET: api/Admin/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TCoupons>> GetTCoupons(int id)
+        [HttpPost("{couponId}")]
+        public async Task<IActionResult> UseCoupon(int couponId)
         {
-          if (_dbXContext.TCoupons == null)
-          {
-              return NotFound();
-          }
-            var tCoupons = await _dbXContext.TCoupons.FindAsync(id);
+            // 從數據庫中獲取優惠券
+            var coupon = _dbXContext.TCoupons.FirstOrDefault(c => c.CouponId == couponId);
 
-            if (tCoupons == null)
+            if (coupon != null && coupon.Quantity > 0)
             {
-                return NotFound();
-            }
-
-            return tCoupons;
-        }
-
-        // PUT: api/Admin/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTCoupons(int id, TCoupons tCoupons)
-        {
-            if (id != tCoupons.CouponId)
-            {
-                return BadRequest();
-            }
-
-            _dbXContext.Entry(tCoupons).State = EntityState.Modified;
-
-            try
-            {
+                // 更新優惠券數量
+                coupon.Quantity -= 1;
                 await _dbXContext.SaveChangesAsync();
+
+                // 返回使用成功的提示
+                return Ok("使用優惠券成功！");
             }
-            catch (DbUpdateConcurrencyException)
+            else
             {
-                if (!TCouponsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                // 返回使用失敗的提示
+                return BadRequest("該優惠券已經用完了！");
             }
-
-            return NoContent();
         }
-
-        // POST: api/Admin
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<TCoupons>> PostTCoupons(TCoupons tCoupons)
-        {
-          if (_dbXContext.TCoupons == null)
-          {
-              return Problem("Entity set 'dbXContext.TCoupons'  is null.");
-          }
-            _dbXContext.TCoupons.Add(tCoupons);
-            await _dbXContext.SaveChangesAsync();
-
-            return CreatedAtAction("GetTCoupons", new { id = tCoupons.CouponId }, tCoupons);
-        }
-
-        // DELETE: api/Admin/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTCoupons(int id)
-        {
-            if (_dbXContext.TCoupons == null)
-            {
-                return NotFound();
-            }
-            var tCoupons = await _dbXContext.TCoupons.FindAsync(id);
-            if (tCoupons == null)
-            {
-                return NotFound();
-            }
-
-            _dbXContext.TCoupons.Remove(tCoupons);
-            await _dbXContext.SaveChangesAsync();
-
-            return NoContent();
-        }
-
+       
         private bool TCouponsExists(int id)
         {
             return (_dbXContext.TCoupons?.Any(e => e.CouponId == id)).GetValueOrDefault();

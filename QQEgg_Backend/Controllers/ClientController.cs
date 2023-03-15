@@ -22,6 +22,7 @@ namespace QQEgg_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class ClientController : ControllerBase
     {
         private readonly dbXContext _dbxContext;
@@ -38,6 +39,7 @@ namespace QQEgg_Backend.Controllers
         /// </summary>
         /// <param name="value"></param>
         /// <returns>註冊完成</returns>
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<string> Register(CustomersDTO value)
         {
@@ -70,6 +72,7 @@ namespace QQEgg_Backend.Controllers
         /// <param name="value"></param>
         /// <returns>TOKEN條碼可以去JWTIO看資料</returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> JwtLogin(LoginPostDTO value)
         {
             if (value.Email != null && value.Password != null)
@@ -160,7 +163,7 @@ namespace QQEgg_Backend.Controllers
         /// <returns>修改完成</returns>
         // PUT: api/Customers/5
         [Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("id")]
         public async Task<string> PutTCustomers(int id, [FromBody] CustomersPUTDTO tCustomers)
         {
             var result = (from c in _dbxContext.TCustomers where c.CustomerId == id select c).SingleOrDefault();

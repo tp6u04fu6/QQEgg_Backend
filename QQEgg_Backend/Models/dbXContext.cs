@@ -188,9 +188,6 @@ namespace QQEgg_Backend.Models
 
                 entity.ToTable("tCustomers");
 
-                entity.HasIndex(e => e.CreditCard, "UQ_tCustomers_CreditCard")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.Email, "UQ_tCustomers_Email")
                     .IsUnique();
 

@@ -41,7 +41,7 @@ namespace QQEgg_Backend.Controllers
         /// <returns>註冊完成</returns>
         [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<string> Register(CustomersDTO value)
+        public async Task<IActionResult> Register([FromBody]CustomersDTO value)
         {
 
             value.EncryptPassword();
@@ -50,11 +50,11 @@ namespace QQEgg_Backend.Controllers
             {
                 Name = value.Name,
                 Email = value.Email,
-                Birth = value.Birth,
+               // Birth = value.Birth,
                 Password = value.PasswordHash,// 將加密後的密碼存入資料
                 Phone = value.Phone,
-                Sex = value.Sex,
-                CreditCard = value.CreditCard,
+                //Sex = value.Sex,
+                //CreditCard = value.CreditCard,
                 BlackListed = true,
                 CreditPoints = 100
 
@@ -63,7 +63,11 @@ namespace QQEgg_Backend.Controllers
             _dbxContext.TCustomers.Add(customer);
             _dbxContext.SaveChanges();
 
-            return "註冊成功";
+            return Ok(new
+            {
+                success = true,
+                message = "註冊成功"
+            });
         }
 
         /// <summary>

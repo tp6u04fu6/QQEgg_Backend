@@ -136,10 +136,10 @@ namespace QQEgg_Backend.Controllers
                         bitmap.UnlockBits(bitmapData);
                     }
                     // 添加Logo到QR码
-                    var logo = new System.Drawing.Bitmap(@"C:\Users\Acer\OneDrive\OneNote 上傳\後端C#\QQEgg_Backend\images\poop (1).png"); // 读取 logo 图片
-                    var g = Graphics.FromImage(bitmap);
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                    g.DrawImage(logo, new System.Drawing.Rectangle((bitmap.Width - logo.Width) / 2, (bitmap.Height - logo.Height) / 2, logo.Width, logo.Height));
+                    //var logo = new System.Drawing.Bitmap(@"C:\Users\Acer\OneDrive\OneNote 上傳\後端C#\QQEgg_Backend\images\poop (1).png"); // 读取 logo 图片
+                    //var g = Graphics.FromImage(bitmap);
+                    //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    //g.DrawImage(logo, new System.Drawing.Rectangle((bitmap.Width - logo.Width) / 2, (bitmap.Height - logo.Height) / 2, logo.Width, logo.Height));
                     // save to folder
                     //string fileGuid = Guid.NewGuid().ToString().Substring(0, 4);
                     //bitmap.Save(Server.MapPath("~/qrr") + "/file-" + fileGuid + ".png", System.Drawing.Imaging.ImageFormat.Png);

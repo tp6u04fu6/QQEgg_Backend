@@ -121,13 +121,11 @@ namespace QQEgg_Backend.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost("{id}")]
-        public string JwtLoginOut(int id)
+        [HttpPost("logout")]
+        public IActionResult Logout()
         {
-            //將當前令牌設為 null
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            return "已登出";
+            // 回傳過期的 JWT token，讓前端清除 token
+            return Ok(new { token = "" });
         }
 
         // GET: api/Customers/5
